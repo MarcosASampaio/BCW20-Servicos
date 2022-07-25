@@ -85,7 +85,7 @@ public class ChamadoController {
                                                  @RequestBody Chamado chamado){
         chamado.setIdChamado(idChamado);
         chamadoService.editarChamado(chamado, idChamado);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(chamado);
     }
 
     //vamos fazer o mapeamento do método de atribuir um funcionario a um determinado chamado
