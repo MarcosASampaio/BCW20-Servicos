@@ -32,7 +32,7 @@ public class CacheConfig {
                                 .serializeValuesWith(serializationPair)
                 ).withCacheConfiguration("chamadosCache",
                         RedisCacheConfiguration.defaultCacheConfig()
-                                .entryTtl(Duration.ofSeconds(10))
+                                .entryTtl(Duration.ofSeconds(40))
                                 .serializeValuesWith(serializationPair)
                 );
     }
