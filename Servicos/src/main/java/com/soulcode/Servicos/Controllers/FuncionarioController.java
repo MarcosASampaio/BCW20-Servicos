@@ -45,11 +45,10 @@ public class FuncionarioController {
 
     @PostMapping("/funcionarios/{idCargo}")
     public ResponseEntity<Funcionario> cadastrarFuncionario(@PathVariable Integer idCargo, @RequestBody Funcionario funcionario){
-        // nessa  linha 42, o funcionário já é salvo na tabela do database
-        // agora precisamos criar uma uri para esse novo registro da tabela
+
         funcionario = funcionarioService.cadastrarFuncionario(funcionario,idCargo);
         URI novaUri = ServletUriComponentsBuilder.fromCurrentRequest().path("id")
-                .buildAndExpand(funcionario.getIdFuncionario()).toUri(); // funcionarios/31
+                .buildAndExpand(funcionario.getIdFuncionario()).toUri();
         return ResponseEntity.created(novaUri).body(funcionario);
 
     }
