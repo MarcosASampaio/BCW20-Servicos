@@ -31,4 +31,11 @@ public class UserController {
         user = userService.cadastrar(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
+   @PutMapping("/usuarios/{loginUsuario}")
+    public ResponseEntity<User> alterarSenha(@PathVariable String loginUsuario, @RequestParam("password") String password, @RequestHeader ("Authorization") String headers){
+        String senhaUser = passwordEncoder.encode(password);
+        userService.alterarSenha(loginUsuario, senhaUser, headers);
+        return ResponseEntity.ok().build();
+   }
+
 }
