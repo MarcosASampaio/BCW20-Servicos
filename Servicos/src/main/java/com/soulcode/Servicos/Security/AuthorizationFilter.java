@@ -1,6 +1,7 @@
 package com.soulcode.Servicos.Security;
 
-import com.soulcode.Servicos.Util.JWTUtils;
+import com.soulcode.Servicos.Util.TokenUtils;
+import com.soulcode.Servicos.Util.TokenUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,12 +17,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
-    private JWTUtils jwtUtils;
+public class AuthorizationFilter extends BasicAuthenticationFilter {
+    private TokenUtils tokenUtils;
 
-    public JWTAuthorizationFilter(AuthenticationManager manager, JWTUtils jwtUtils) {
+    public AuthorizationFilter(AuthenticationManager manager, TokenUtils tokenUtils) {
         super(manager);
-        this.jwtUtils = jwtUtils;
+        this.tokenUtils = tokenUtils;
     }
 
     @Override
@@ -38,7 +39,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     }
 
     public UsernamePasswordAuthenticationToken getAuthentication(String token) {
-        String login = jwtUtils.getLogin(token);
+        String login = tokenUtils.getLogin(token);
         if (login == null) {
             return null;
         }

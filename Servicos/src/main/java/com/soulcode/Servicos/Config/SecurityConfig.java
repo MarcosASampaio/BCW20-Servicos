@@ -1,9 +1,9 @@
 package com.soulcode.Servicos.Config;
 
-import com.soulcode.Servicos.Security.JWTAuthenticationFilter;
-import com.soulcode.Servicos.Security.JWTAuthorizationFilter;
-import com.soulcode.Servicos.Services.AuthUserDetailService;
-import com.soulcode.Servicos.Util.JWTUtils;
+import com.soulcode.Servicos.Security.AuthenticationFilter;
+import com.soulcode.Servicos.Security.AuthorizationFilter;
+import com.soulcode.Servicos.Services.UserSecurityDetailService;
+import com.soulcode.Servicos.Util.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -22,12 +22,12 @@ import java.util.List;
 
 
 @EnableWebSecurity
-public class JWTConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private JWTUtils jwtUtils;
+    private TokenUtils tokenUtils;
 
     @Autowired
-    private AuthUserDetailService userDetailService;
+    private UserSecurityDetailService userDetailService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -40,8 +40,8 @@ public class JWTConfig extends WebSecurityConfigurerAdapter {
 
         http.cors().and().csrf().disable();
 
-        http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtils));
-        http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtils));
+        http.addFilter(new AuthenticationFilter(authenticationManager(), tokenUtils));
+        http.addFilter(new AuthorizationFilter(authenticationManager(), tokenUtils));
 
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
