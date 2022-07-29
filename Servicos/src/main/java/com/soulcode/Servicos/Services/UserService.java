@@ -2,7 +2,7 @@ package com.soulcode.Servicos.Services;
 
 import com.soulcode.Servicos.Models.User;
 import com.soulcode.Servicos.Repositories.UserRepository;
-import com.soulcode.Servicos.Util.JWTUtils;
+import com.soulcode.Servicos.Util.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private JWTUtils jwtUtils;
+    private TokenUtils tokenUtils;
 
     public List<User> listar() {
         return userRepository.findAll();
@@ -27,7 +27,7 @@ public class UserService {
 
     public User alterarSenha(String login, String password, String headers){
         if(headers.startsWith("Bearer") && headers != null){
-            String email = jwtUtils.getLogin(headers.substring(7));
+            String email = tokenUtils.getLogin(headers.substring(7));
             Optional<User> userToken = userRepository.findByLogin(email);
             Optional<User> userParam = userRepository.findByLogin(login);
             if(userToken.get().getLogin() == userParam.get().getLogin()){
