@@ -23,6 +23,7 @@ public class UserSecurityDetailService implements UserDetailsService {
             throw new UsernameNotFoundException("Usuário não encontrado");
         }
         // user.get().getStatus();
-        return new UserSecurityDetail(user.get().getLogin(), user.get().getPassword());
+        return new UserSecurityDetail(user.get().getLogin(), user.get().getPassword(), user.get().isStatusAccount());
     }
+
 }

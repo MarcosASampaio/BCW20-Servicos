@@ -1,5 +1,6 @@
 package com.soulcode.Servicos.Security;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,10 +11,12 @@ import java.util.Collection;
 public class UserSecurityDetail implements UserDetails {
     private String login;
     private String password;
+    private boolean statusAccount;
 
-    public UserSecurityDetail(String login, String password) {
+    public UserSecurityDetail(String login, String password, boolean statusAccount) {
         this.login = login;
         this.password = password;
+        this.statusAccount = statusAccount;
     }
 
     @Override
@@ -48,6 +51,6 @@ public class UserSecurityDetail implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return statusAccount;
     }
 }

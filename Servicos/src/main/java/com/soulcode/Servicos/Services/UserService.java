@@ -2,8 +2,10 @@ package com.soulcode.Servicos.Services;
 
 import com.soulcode.Servicos.Models.User;
 import com.soulcode.Servicos.Repositories.UserRepository;
+import com.soulcode.Servicos.Security.UserSecurityDetail;
 import com.soulcode.Servicos.Util.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,4 +39,12 @@ public class UserService {
         }
         throw new RuntimeException("Erro! Não foi possível concluir o processo");
     }
+
+    public User desativeAccount(String login){
+        Optional<User> userParam = userRepository.findByLogin(login);
+        userParam.get().setStatusAccount(false);
+        return userRepository.save(userParam.get());
+    }
 }
+
+// Principal principal > getname()
