@@ -15,7 +15,7 @@ public class CargoService {
     @Autowired
     CargoRepository cargoRepository;
 
-    // primeiro serviço: mostrar todos os cargos cadastrados
+
     @Cacheable("cargosCache")
     public List<Cargo> mostrarTodosCargos(){
         return cargoRepository.findAll();
@@ -27,7 +27,6 @@ public class CargoService {
     }
 
     public Cargo cadastrarCargo(Cargo cargo){
-        //por precaução vamos limpar o id do Cargo
         cargo.setIdCargo(null);
         return cargoRepository.save(cargo);
     }

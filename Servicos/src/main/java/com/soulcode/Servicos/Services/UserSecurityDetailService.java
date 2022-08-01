@@ -26,7 +26,3 @@ public class UserSecurityDetailService implements UserDetailsService {
         return new UserSecurityDetail(user.get().getLogin(), user.get().getPassword());
     }
 }
-/**
- * O propósito do UserDetailService é carregar de alguma fonte de dados
- * o usuário e criar uma instância de AuthUserDetail, conhecida pelo Spring.
- */
