@@ -20,7 +20,7 @@ public class PagamentoService {
     @Autowired
     ChamadoRepository chamadoRepository;
 
-    //primeiro serviço -> mostrar todos os registros de pagamento
+
     public List<Pagamento> mostrarTodosPagamentos(){
         return pagamentoRepository.findAll();
     }
