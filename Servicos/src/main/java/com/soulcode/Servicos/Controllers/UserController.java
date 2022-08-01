@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -38,4 +39,11 @@ public class UserController {
         return ResponseEntity.ok().build();
    }
 
+   @PatchMapping("/usuarios/{loginUsuario}")
+    public ResponseEntity<User> desativeAccount(@PathVariable String loginUsuario, Principal principal){
+        if (principal.getName().equals(loginUsuario)){
+            userService.desativeAccount(loginUsuario);
+        }
+        return ResponseEntity.ok().build();
+   }
 }

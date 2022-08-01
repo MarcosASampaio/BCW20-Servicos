@@ -15,6 +15,9 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
+    @Column(nullable = false)
+    private boolean statusAccount;
+
     public Integer getId() {
         return id;
     }
@@ -37,5 +40,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isStatusAccount() {
+        return statusAccount;
+    }
+
+    public void setStatusAccount(boolean statusAccount) {
+        this.statusAccount = statusAccount;
     }
 }
